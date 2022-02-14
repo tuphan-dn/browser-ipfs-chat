@@ -82,7 +82,6 @@
           } else {
             document.getElementById("status-ball").style.color = "yellow";
           }
-          dobootstrap(true); // sometimes we appear to be connected to the bootstrap nodes, but we're not, so let's try to reconnect
         } else {
           document.getElementById("status-ball").style.color = "lime";
         }
@@ -150,28 +149,6 @@
         }
       }
 
-      // if reconnect is true, it'll first attempt to disconnect from the bootstrap nodes
-      async function dobootstrap(reconnect) {
-        now = new Date().getTime();
-        if (now - lastBootstrap < 60000) {
-          // don't try to bootstrap again if we just tried within the last 60 seconds
-          return;
-        }
-        lastBootstrap = now;
-        for (i in bootstraps) {
-          if (reconnect) {
-            try {
-              await ipfs.swarm.disconnect(bootstraps[i]);
-            } catch (e) {
-              console.log(e);
-            }
-          } else {
-            await ipfs.bootstrap.add(bootstraps[i]);
-          }
-          await ipfs.swarm.connect(bootstraps[i]);
-        }
-      }
-
       // set this to body's onload function
       async function onload() {
         ipfs = await Ipfs.create({
@@ -200,8 +177,6 @@
             // FIXME Announce: [ '/p2p/12D3KooWChhhfGdB9GJy1GbhghAAKCUR99oCymMEVS4eUcEy67nt/p2p-circuit' ],
           },
         });
-        // add bootstraps for next time, and attempt connection just in case we're not already connected
-        await dobootstrap(false);
 
         // join a global channel, because we don't have real chat channels implemented yet
         joinchan("global");
