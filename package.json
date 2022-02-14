@@ -1,0 +1,23 @@
+{
+  "name": "browser-ipfs-chat",
+  "version": "1.0.0",
+  "description": "Simple all-in-one demo showing how to deploy a browser js-ipfs application.",
+  "main": "ipfs.min.js",
+  "scripts": {
+    "deploy": "gh-pages -d src",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tuphan-dn/browser-ipfs-chat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tuphan-dn/browser-ipfs-chat/issues"
+  },
+  "homepage": "https://github.com/tuphan-dn/browser-ipfs-chat#readme",
+  "devDependencies": {
+    "gh-pages": "^3.2.3"
+  }
+}
